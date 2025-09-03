@@ -11,19 +11,26 @@ const groq = new Groq({
 });
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "../public")));
+// Updated to use a more reliable path for static files, assuming public is at project root
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 function convertToAMPM(time) {
+  // Add input validation
+  if (!time || typeof time !== "string") return "Invalid Time";
   const [hours, minutes] = time.split(":");
-  let period = "AM";
+  if (!hours || !minutes) return "Invalid Time Format";
   let h = parseInt(hours, 10);
+  if (isNaN(h) || h < 0 || h > 23) return "Invalid Hour";
+  let m = parseInt(minutes, 10);
+  if (isNaN(m) || m < 0 || m > 59) return "Invalid Minutes";
+  let period = "AM";
   if (h === 0) h = 12;
   else if (h === 12) period = "PM";
   else if (h > 12) {
     h -= 12;
     period = "PM";
-  }
-  return `${h}:${minutes} ${period}`;
+  } else if (h < 0) h = 0; // Safeguard
+  return `${h}:${minutes.padStart(2, "0")} ${period}`;
 }
 
 app.post("/generate", async (req, res) => {
@@ -36,18 +43,19 @@ app.post("/generate", async (req, res) => {
     "paper-name": paperName,
     "exam-date": examDate,
     "exam-time": examTime,
-  } = req.body;
+  } = req.body || {};
 
-  const examTimeAMPM = convertToAMPM(examTime);
+  // Default to empty strings if undefined to avoid prompt errors
+  const examTimeAMPM = convertToAMPM(examTime || "00:00");
 
   const prompt = `Generate a concise, formal, and professional exam notice using the following details:
-- Course: ${course}
-- Semester: ${semester}
-- Session: ${session}
-- Exam Type: ${examType}
-- Paper Code: ${paperCode}
-- Paper Name: ${paperName}
-- Exam Date: ${examDate}
+- Course: ${course || "N/A"}
+- Semester: ${semester || "N/A"}
+- Session: ${session || "N/A"}
+- Exam Type: ${examType || "N/A"}
+- Paper Code: ${paperCode || "N/A"}
+- Paper Name: ${paperName || "N/A"}
+- Exam Date: ${examDate || "N/A"}
 - Exam Time: ${examTimeAMPM}
 
 The notice should be in a standard notification format and easy to read. Do not add any placeholders. Use only the provided details`;
@@ -70,4 +78,10 @@ The notice should be in a standard notification format and easy to read. Do not 
   }
 });
 
-module.exports = app;
+// Add listener for Railway, using process.env.PORT
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+module.exports = app; // Keep for potential Vercel redeployment
