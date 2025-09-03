@@ -1,18 +1,30 @@
-// server.js
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 require("dotenv").config();
 const Groq = require("groq-sdk");
 
 const app = express();
-const port = 3000;
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, "../public")));
+
+function convertToAMPM(time) {
+  const [hours, minutes] = time.split(":");
+  let period = "AM";
+  let h = parseInt(hours, 10);
+  if (h === 0) h = 12;
+  else if (h === 12) period = "PM";
+  else if (h > 12) {
+    h -= 12;
+    period = "PM";
+  }
+  return `${h}:${minutes} ${period}`;
+}
 
 app.post("/generate", async (req, res) => {
   const {
@@ -26,7 +38,7 @@ app.post("/generate", async (req, res) => {
     "exam-time": examTime,
   } = req.body;
 
-  // console.log("Request body:", req.body); // Log incoming data
+  const examTimeAMPM = convertToAMPM(examTime);
 
   const prompt = `Generate a concise, formal, and professional exam notice using the following details:
 - Course: ${course}
@@ -36,7 +48,7 @@ app.post("/generate", async (req, res) => {
 - Paper Code: ${paperCode}
 - Paper Name: ${paperName}
 - Exam Date: ${examDate}
-- Exam Time: ${examTime} (Change the time into AM/PM format)
+- Exam Time: ${examTimeAMPM}
 
 The notice should be in a standard notification format and easy to read. Do not add any placeholders. Use only the provided details`;
 
@@ -58,6 +70,4 @@ The notice should be in a standard notification format and easy to read. Do not 
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+module.exports = app;
