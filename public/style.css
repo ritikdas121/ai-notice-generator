@@ -51,6 +51,7 @@ p {
   font-size: 38px;
   letter-spacing: 1px;
   font-weight: 700;
+  color: var(--accent);
 }
 
 .content {
@@ -82,8 +83,9 @@ p {
   }
 }
 
-.form-card h2 {
-  margin-top: 0;
+.form-card h2,
+.notice-card h2 {
+  color: var(--accent);
 }
 
 .muted {
@@ -174,6 +176,16 @@ p {
   background: #2e2e2e;
 }
 
+.btn.outline {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  transition: all linear 0.2s;
+}
+
+.btn.outline:hover {
+  background: #f5f4f5;
+}
+
 .btn.delete-btn {
   background: #c52d2d;
 }
@@ -182,19 +194,23 @@ p {
   background: #aa2626;
 }
 
+.notice-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .notice-card .notice-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.notice-header {
-  align-items: flex-start !important;
+  align-items: flex-start;
 }
 
 #output-section {
   border: 1px solid var(--accent);
-  padding: 10px;
+  background-color: #6e58ce0e;
+  padding: 16px;
   border-radius: var(--radius);
 }
 
@@ -203,12 +219,12 @@ p {
 }
 
 pre {
-  /* font-family: "Geist", sans-serif; */
+  font-family: "Geist", sans-serif;
   white-space: pre-wrap;
   word-wrap: break-word;
   border-radius: var(--radius);
   color: var(--text);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 /* Responsive */
