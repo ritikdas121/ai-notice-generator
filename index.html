@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Notice Generator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="app-header">
+        <h1>AI Notice Generator</h1>
+        <p class="muted">
+          Web App by Student of MCA Dept. SKM University Dumka
+        </p>
+      </header>
+
+      <section class="content grid">
+        <!-- Notice Form -->
+        <div class="card form-card">
+          <h2>Notice Details</h2>
+          <p class="muted">Add your notice details using the form below</p>
+
+          <form id="input-form" class="input-form">
+            <div class="field-group">
+              <div class="field-left">
+                <label for="course">Course</label>
+                <input
+                  type="text"
+                  id="course"
+                  name="course"
+                  placeholder="e.g., MCA, B.Sc"
+                  required
+                />
+              </div>
+              <div class="field-right">
+                <label for="semester">Semester</label>
+                <select id="semester" name="semester" required>
+                  <option value="">Select Semester</option>
+                  <option value="I">I</option>
+                  <option value="II">II</option>
+                  <option value="III">III</option>
+                  <option value="IV">IV</option>
+                  <option value="V">V</option>
+                  <option value="VI">VI</option>
+                  <option value="VII">VII</option>
+                  <option value="VIII">VIII</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div class="field-left">
+                <label for="session">Session</label>
+                <input type="text" id="session" name="session" required />
+              </div>
+              <div class="field-right">
+                <label for="exam-type">Exam Type</label>
+                <input
+                  type="text"
+                  id="exam-type"
+                  name="exam-type"
+                  placeholder="e.g., Internal, External"
+                  required
+                />
+              </div>
+            </div>
+
+            <label for="paper-code">Paper Code</label>
+            <input type="text" id="paper-code" name="paper-code" required />
+
+            <label for="paper-name">Paper Name</label>
+            <input type="text" id="paper-name" name="paper-name" required />
+
+            <div class="field-group">
+              <div class="field-left">
+                <label for="exam-date">Exam Date</label>
+                <input type="date" id="exam-date" name="exam-date" required />
+              </div>
+
+              <div class="field-left">
+                <label for="exam-time">Exam Time</label>
+                <input type="time" id="exam-time" name="exam-time" required />
+              </div>
+            </div>
+
+            <button type="submit" class="btn primary">🟆 Generate Notice</button>
+          </form>
+        </div>
+
+        <!-- Notice Section -->
+        <section class="card notice-card">
+          <div class="notice-header">
+            <div class="notice-header-left">
+              <h2>Generated Notice</h2>
+              <p class="muted">Generated notice will appear here.</p>
+            </div>
+            <button id="copy-button" class="btn primary">Copy</button>
+          </div>
+          <div id="output-section" class="hidden">
+            <pre id="notice-text"></pre>
+          </div>
+        </section>
+      </section>
+      <footer class="app-footer">
+        <p>© AI Notice Generator. All Rights Reserved.</p>
+        <p class="muted">
+          Made with ❤︎ By
+          <a
+            href="https://linktr.ee/ritikkumardas"
+            class="btn outline small"
+            target="_blank"
+            >Ritik</a
+          >
+        </p>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

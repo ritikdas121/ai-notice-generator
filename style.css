@@ -1,0 +1,236 @@
+:root {
+  --bg: #ffffff;
+  --card: #ffffff;
+  --muted: #737373;
+  --border: #e5e5e5;
+  --text: #0a0a0a;
+  /* --accent: #171717; */
+  --accent: #6e58ce;
+  --radius: 12px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Geist", sans-serif;
+  background: var(--bg);
+  margin: 0;
+  color: var(--text);
+}
+
+p {
+  padding: 10px 0;
+}
+
+.page {
+  max-width: 1150px;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.app-header,
+.app-footer {
+  background: transparent;
+  padding: 10px;
+  text-align: center;
+  border-radius: var(--radius);
+  margin-bottom: 18px;
+  border: 1px solid var(--border);
+}
+
+.app-footer {
+  margin-top: 22px;
+}
+
+.app-header h1 {
+  font-size: 38px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: #959da533 0px 2px 6px;
+  border: 1px solid var(--border);
+  animation: fadeIn 0.4s linear forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.form-card h2 {
+  margin-top: 0;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.input-form label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+.input-form input[type="date"],
+.input-form input[type="time"],
+.input-form input[type="number"],
+.input-form input[type="text"],
+.input-form select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-family: "Geist";
+  font-size: 14px;
+  transition: all linear 0.2s;
+}
+
+.input-form input[type="date"]:focus,
+.input-form input[type="time"]:focus,
+.input-form input[type="number"]:focus,
+.input-form input[type="text"]:focus,
+.input-form select:focus {
+  outline: none;
+  border: 1px solid var(--accent);
+}
+
+.input-form button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+}
+
+/* .input-form .form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+} */
+
+.field-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+.field-left {
+  width: 50%;
+}
+.field-right {
+  width: 50%;
+}
+.btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: white;
+  transition: all linear 0.2s;
+}
+
+.btn.primary:hover {
+  background: #2e2e2e;
+}
+
+.btn.outline {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  transition: all linear 0.2s;
+}
+
+.btn.outline:hover {
+  background: #f5f4f5;
+}
+
+.btn.delete-btn {
+  background: #c52d2d;
+}
+
+.btn.delete-btn:hover {
+  background: #aa2626;
+}
+
+.notice-card .notice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notice-header {
+  align-items: flex-start !important;
+}
+
+#output-section {
+  border: 1px solid var(--accent);
+  padding: 20px 0px;
+  border-radius: var(--radius);
+}
+
+#output-section.hidden {
+  display: none;
+}
+
+pre {
+  font-family: "Inter", sans-serif;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 10px;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+  .app-header h1 {
+    font-size: 28px;
+  }
+  .page {
+    padding: 16px;
+  }
+}
