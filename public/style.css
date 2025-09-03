@@ -174,16 +174,6 @@ p {
   background: #2e2e2e;
 }
 
-.btn.outline {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  transition: all linear 0.2s;
-}
-
-.btn.outline:hover {
-  background: #f5f4f5;
-}
-
 .btn.delete-btn {
   background: #c52d2d;
 }
@@ -204,7 +194,7 @@ p {
 
 #output-section {
   border: 1px solid var(--accent);
-  padding: 20px 0px;
+  padding: 10px;
   border-radius: var(--radius);
 }
 
@@ -213,10 +203,9 @@ p {
 }
 
 pre {
-  font-family: "Inter", sans-serif;
+  /* font-family: "Geist", sans-serif; */
   white-space: pre-wrap;
   word-wrap: break-word;
-  padding: 10px;
   border-radius: var(--radius);
   color: var(--text);
   font-size: 14px;
