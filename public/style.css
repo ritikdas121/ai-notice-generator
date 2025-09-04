@@ -4,7 +4,6 @@
   --muted: #737373;
   --border: #e5e5e5;
   --text: #0a0a0a;
-  /* --accent: #171717; */
   --accent: #6e58ce;
   --radius: 12px;
 }
@@ -173,7 +172,8 @@ p {
 }
 
 .btn.primary:hover {
-  background: #2e2e2e;
+  /* background: #2e2e2e; */
+  opacity: 0.85;
 }
 
 .btn.outline {

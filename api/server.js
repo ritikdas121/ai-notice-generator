@@ -11,26 +11,14 @@ const groq = new Groq({
 });
 
 app.use(bodyParser.json());
-// Updated to use a more reliable path for static files, assuming public is at project root
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 function convertToAMPM(time) {
-  // Add input validation
-  if (!time || typeof time !== "string") return "Invalid Time";
-  const [hours, minutes] = time.split(":");
-  if (!hours || !minutes) return "Invalid Time Format";
+  let [hours, minutes] = time.split(":");
   let h = parseInt(hours, 10);
-  if (isNaN(h) || h < 0 || h > 23) return "Invalid Hour";
-  let m = parseInt(minutes, 10);
-  if (isNaN(m) || m < 0 || m > 59) return "Invalid Minutes";
-  let period = "AM";
-  if (h === 0) h = 12;
-  else if (h === 12) period = "PM";
-  else if (h > 12) {
-    h -= 12;
-    period = "PM";
-  } else if (h < 0) h = 0; // Safeguard
-  return `${h}:${minutes.padStart(2, "0")} ${period}`;
+  let period = h >= 12 ? "PM" : "AM";
+  h = h % 12 || 12;
+  return `${h}:${minutes} ${period}`;
 }
 
 app.post("/generate", async (req, res) => {
@@ -46,7 +34,7 @@ app.post("/generate", async (req, res) => {
   } = req.body || {};
 
   // Default to empty strings if undefined to avoid prompt errors
-  const examTimeAMPM = convertToAMPM(examTime || "00:00");
+  const examTimeAMPM = convertToAMPM(examTime);
 
   const prompt = `Generate a concise, formal, and professional exam notice using the following details:
 - Course: ${course || "N/A"}
@@ -78,10 +66,7 @@ The notice should be in a standard notification format and easy to read. Do not 
   }
 });
 
-// Add listener for Railway, using process.env.PORT
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-module.exports = app; // Keep for potential Vercel redeployment
