@@ -65,7 +65,6 @@ p {
   background: var(--card);
   border-radius: var(--radius);
   padding: 22px;
-  box-shadow: #959da533 0px 2px 6px;
   border: 1px solid var(--border);
   animation: fadeIn 0.4s linear forwards;
 }
@@ -110,7 +109,8 @@ p {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid var(--border);
-  background: #fff;
+  background: var(--bg);
+  color: var(--text);
   font-family: "Geist";
   font-size: 14px;
   transition: all linear 0.2s;
@@ -177,13 +177,13 @@ p {
 }
 
 .btn.outline {
-  background: #fff;
+  background: var(--bg);
   border: 1px solid rgba(0, 0, 0, 0.12);
   transition: all linear 0.2s;
 }
 
 .btn.outline:hover {
-  background: #f5f4f5;
+  /* background: #f5f4f5; */
 }
 
 .btn.delete-btn {
