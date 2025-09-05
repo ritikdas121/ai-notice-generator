@@ -214,7 +214,8 @@ p {
   border-radius: var(--radius);
 }
 
-#output-section.hidden {
+#output-section.hidden,
+#copy-button.hidden {
   display: none;
 }
 
@@ -227,6 +228,26 @@ pre {
   font-size: 15px;
   font-weight: 500;
   font-style: italic;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #d7fae5;
+  color: #258e53;
+  border: 1px solid #93dab2;
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.toast.show {
+  opacity: 1;
 }
 
 /* Responsive */

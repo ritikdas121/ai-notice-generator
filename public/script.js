@@ -19,15 +19,17 @@ document.getElementById("input-form").addEventListener("submit", async (e) => {
 
     const outputSection = document.getElementById("output-section");
     const noticeText = document.getElementById("notice-text");
+    const copyBtn = document.getElementById("copy-button");
 
     noticeText.textContent = notice;
     outputSection.classList.remove("hidden");
+    copyBtn.classList.remove("hidden");
 
-    document.getElementById("copy-button").onclick = () => {
+    copyBtn.onclick = () => {
       navigator.clipboard
         .writeText(notice)
         .then(() => {
-          alert("Copied to clipboard!");
+          showToast("Copied to clipboard!");
         })
         .catch((err) => {
           console.error("Failed to copy: ", err);
@@ -38,3 +40,20 @@ document.getElementById("input-form").addEventListener("submit", async (e) => {
     alert("Error generating notice. Please try again.");
   }
 });
+
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add("show");
+  });
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 300);
+  }, 2000);
+}
