@@ -20,10 +20,12 @@ document.getElementById("input-form").addEventListener("submit", async (e) => {
     const outputSection = document.getElementById("output-section");
     const noticeText = document.getElementById("notice-text");
     const copyBtn = document.getElementById("copy-button");
+    const actions = document.getElementById("actions");
+    const waShare = document.getElementById("wa-share");
 
     noticeText.textContent = notice;
     outputSection.classList.remove("hidden");
-    copyBtn.classList.remove("hidden");
+    actions.classList.remove("hidden");
 
     copyBtn.onclick = () => {
       navigator.clipboard
@@ -34,6 +36,11 @@ document.getElementById("input-form").addEventListener("submit", async (e) => {
         .catch((err) => {
           console.error("Failed to copy: ", err);
         });
+    };
+
+    waShare.onclick = () => {
+      const whatsappURL = `https://wa.me/?text=${encodeURIComponent(notice)}`;
+      window.open(whatsappURL, "_blank");
     };
   } catch (error) {
     console.error(error);

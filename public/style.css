@@ -154,7 +154,7 @@ p {
   border-radius: 8px;
   border: 0;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 400;
   font-family: inherit;
   text-decoration: none;
 }
@@ -215,7 +215,7 @@ p {
 }
 
 #output-section.hidden,
-#copy-button.hidden {
+#actions.hidden {
   display: none;
 }
 
@@ -226,8 +226,18 @@ pre {
   border-radius: var(--radius);
   color: var(--text);
   font-size: 15px;
-  font-weight: 500;
   font-style: italic;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn.wa-share {
+  background-color: #25d366;
 }
 
 .toast {
