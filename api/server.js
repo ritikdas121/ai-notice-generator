@@ -37,16 +37,16 @@ app.post("/generate", async (req, res) => {
   const examTimeAMPM = convertToAMPM(examTime);
 
   const prompt = `Generate a concise, formal, and professional exam notice using the following details:
-- Course: ${course || "N/A"}
-- Semester: ${semester || "N/A"}
-- Session: ${session || "N/A"}
-- Exam Type: ${examType || "N/A"}
-- Paper Code: ${paperCode || "N/A"}
-- Paper Name: ${paperName || "N/A"}
-- Exam Date: ${examDate || "N/A"}
+- Course: ${course}
+- Semester: ${semester}
+- Session: ${session}
+- Exam Type: ${examType}
+- Paper Code: ${paperCode}
+- Paper Name: ${paperName}
+- Exam Date: ${examDate}
 - Exam Time: ${examTimeAMPM}
 
-The notice should be in a standard notification format and easy to read. Do not add any placeholders. Use only the provided details`;
+The notice should be in a standard notification format and easy to read. Do not add any placeholders in the generated notice. Use only the provided details`;
 
   try {
     const completion = await groq.chat.completions.create({
